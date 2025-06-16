@@ -1,20 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoanOfferController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/loan-offers', [LoanOfferController::class, 'index']);
+Route::post('/loan-offers', [LoanOfferController::class, 'store']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
+Route::patch('/loan-offers/{offer}', [LoanOfferController::class, 'update']);
+Route::delete('/loan-offers/{offer}', [LoanOfferController::class, 'destroy']);

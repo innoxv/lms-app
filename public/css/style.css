@@ -1,0 +1,2498 @@
+body, html{
+    margin: 0;
+    background: radial-gradient(
+        circle at center,
+        #1D1E20 10%,
+        #2C2C2C 20%,
+        #3A3A3A 30%,
+        #2C2C2C 40%,
+        #1D1E20 50%,
+        #2C2C2C 60%,
+        #3A3A3A 70%,
+        #2C2C2C 80%,
+        #1D1E20 90%
+      );
+
+}
+body{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+
+}
+
+.loan_offers{
+    display: flex;
+    justify-content: space-around;
+    height: 100%;
+    padding: 5rem 8rem;
+}
+.loan_offers h1, h2{
+    color: lightgray;
+}
+.loan_offers > div{
+    width: 50%;
+}
+.loan_offers form input{
+    display: flex;
+    margin: 0;
+}
+
+.loan_offers_table{
+    width: 100%;
+    border-collapse: collapse;
+    margin: .5em 0;
+    animation: fadeIn 0.3s ease-in-out;
+    overflow-y: auto;
+}
+
+.loan_offers_table th {
+    background: #3A3A3A;
+    padding: .5em 0;
+    text-align: left;
+    color: whitesmoke;
+}
+.loan_offers_table td{
+    color: lightgray;
+    text-align: left;
+
+}
+.delete-btn{
+    background-color: tomato;
+    color: #1D1E20;
+}
+.delete-btn:hover{
+    background-color: transparent;
+    color: tomato;
+    outline: 1px solid tomato;
+}
+
+/* pop up modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #28282B;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    padding: 20px;
+    border-radius: 8px;
+    width: 20%;
+    z-index: 1001;
+}
+.modal-action{
+    width: 100%;
+    display: flex;
+    gap: 2px;
+}
+.modal-action > button{
+    width: 50%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ##################################   REUSABLE STYLES  ##################################################################### */
+*:focus {
+    outline: none;
+}
+
+/* Center the page content */
+.centered-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+/* Container styling */
+.container {
+    width: auto; 
+    min-width: 320px; /* Minimum mobile width */
+    max-width: 900px; /* Maximum width for larger screens */
+    height: auto;
+    padding: 1rem;
+    border-radius: .5em;
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Table responsiveness */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto; 
+}
+
+.header-label{
+    color: #74C0FC;
+    font-size: 1.5em;
+    margin: .2em;
+}
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* margin: 1em 0; */
+    height: 100%;
+    /* width: fit-content; */
+    padding: 1em;
+
+}
+.content-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+#signin form{
+    width: 100%;
+}
+#signin table{
+    width: 100%;;
+}
+.signin tr{
+    display: flex;
+    flex-direction: column;
+}
+
+.signin input{
+    padding: .5em;
+    margin: .2em 0;
+    width: 100%;
+    box-sizing: border-box;
+
+
+}
+/* Sign In checkbox mods */
+/* Password input container */
+.password-input-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Hide default checkbox */
+.checkbox-label input[type="checkbox"] {
+    display: none;
+}
+
+/* Position the eye icon inside the input */
+.checkbox-label {
+    position: absolute;
+    right: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* Custom checkbox */
+.custom-checkbox {
+    width: 1em;
+    height: 1em;
+    position: relative;
+    display: inline-block;
+    background-color: lightgray;
+    border-radius: 50%;
+    border: 1px solid light;
+
+}
+
+/* Checked state (show password, open eye) */
+.checkbox-label input[type="checkbox"]:checked + .custom-checkbox::after {
+    content: "👁"; /* Open eye for show password */
+    color: #2C2C2C; 
+    font-size: .8em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Strikethrough eye when unchecked */
+.checkbox-label input[type="checkbox"]:not(:checked) + .custom-checkbox::after {
+    content: "👁"; /* Same open eye */
+    color: #2C2C2C; 
+    font-size: .8em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Strikethrough slash for unchecked state */
+.checkbox-label input[type="checkbox"]:not(:checked) + .custom-checkbox::before {
+    content: "";
+    position: absolute;
+    width: 1.2em; /* Length of slash */
+    height: 2px; /* Thickness of slash */
+    background-color: #1D1E20; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(50deg); /* Diagonal slash */
+}
+
+/* Hover effect */
+.checkbox-label:hover .custom-checkbox::after {
+    color: #74C0FC;
+}
+
+label{
+    color: lightgray;
+    font-size: 1em;
+    font-weight: 900;
+}
+input{
+    padding: .7em;
+    background: none;
+    border: none;
+    border-bottom: 1px solid whitesmoke;
+    outline: none;
+    color: white;
+    font-size: 1.1em;
+    margin: .2em 1em;
+    border-radius: 6px;
+    /* text-align: right;  Bug to a Feature 7.4.25 19:15 */
+
+
+}
+input::placeholder{
+    color:gray;
+    font-size: .9em;
+    text-align: start;
+}
+.select{
+    padding: .7em 0;
+    background: #28282B;
+    border: none;
+    border-bottom: 1px solid whitesmoke;
+    outline: none;
+    margin: .2em 1.2em;
+    color: white;
+    font-size: 1em;
+}
+.signin-submit-action{
+    display: flex;
+    justify-content: center;
+    height: 4em;
+}
+.signup-submit-action{
+    height: 4em;
+}
+.hidden{
+    display: none;
+}
+button{
+    /* width: 100%; */
+    padding: 0.7em;
+    border-radius: .5em;
+    border: none;
+    background: #74C0FC;
+    color: #1D1E20;
+    cursor: pointer;
+    font-weight: 700;
+    
+}
+button:hover{
+    color: #74C0FC;
+    background: transparent;
+    outline: 1px solid #74C0FC;
+    transition: .2s ease-in-out;
+
+}
+.alt{
+    color: lightgray;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.alt button, .signup-alt button{
+    border: none;
+    background: transparent;
+    font-weight: unset;
+    padding: unset;
+}
+.alt button:hover, .signup-alt button:hover{
+    outline: none;
+    background: transparent;
+    font-weight: 700;
+    transition: .2s ease-in-out;
+}
+a{
+    text-decoration: none;
+    color: #74C0FC;
+}
+.signup-alt{
+    color: lightgray;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.signup-alt > :first-child{
+    margin-inline: 1.5em;
+}
+
+
+
+
+/* Landingpage */
+
+.landingpage{
+    height: 100vh;
+}
+
+/* Default margins (for larger screens) */
+main {
+    margin: 0 3em;
+    /* height: 90vh; */
+    /* display: flex;
+    flex-direction: column; */
+    /* align-content: center; */
+}
+
+/* For tablets (768px to 991px) */
+@media (max-width: 991px) {
+    main {
+        margin: 0 1.8em; /* Slightly smaller side margins */
+    }
+}
+
+/* For mobile devices (less than 768px) */
+@media (max-width: 767px) {
+    main {
+        margin: 0 .8em; /* Even smaller margins on all sides */
+    }
+}
+
+/* For very small mobile devices (less than 480px) */
+@media (max-width: 479px) {
+    main {
+        margin: 0 0.5em; /* Minimal margins */
+    }
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: whitesmoke;
+    justify-content: space-between;
+    font-size: 1.1em;
+    
+}
+.logo{
+    color: #74C0FC;
+    font-weight: 900;
+}
+.header2{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.header2 ul, .header3 ul, .header4 ul{
+    list-style: none;
+    display: flex;
+}
+.header2 ul li{
+    margin-inline: 2em;
+}
+.header4{
+    /* outline: 1px solid red; */
+    width: 84%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.header4 li a{
+    color: whitesmoke;
+    transition: .2s ease-in-out;
+
+}
+.header4 li a:hover{
+    color: #74C0FC;
+}
+.header3 ul li{
+    margin-inline: .5em;
+}
+.header3 li a{
+    color: #74C0FC;
+}
+.header3 .no-col{
+    color: whitesmoke;
+}
+.header3 .no-col:hover{
+    color: #74C0FC;
+    transition: .2s ease-in-out;
+}
+.header3 li a:hover{
+    color: whitesmoke;
+    transition: .2s ease-in-out;
+
+}
+.hero-section{
+    align-items: center;
+    height: 80vh;
+    width: 100%;
+    /* outline: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+}
+.hero-section h1{
+    font-size: 5em;
+    color: whitesmoke;
+}
+.hero-section p{
+    font-size: 1.1em;
+    color: lightgray;
+    margin-bottom: 2em;
+}
+.left, .right{
+    width: 50%;
+    
+}
+
+.left a{
+    padding: 0.7em;
+    border-radius: .5em;
+    border: none;
+    background: transparent;
+    color: #74C0FC;
+    outline: 1px solid #74C0FC;
+    margin-top: 2em;
+    cursor: pointer;
+    font-weight: 700;
+}
+.left a:hover{
+    background-color: #74C0FC;
+    color: #1D1E20;
+    transition: .3s ease-in-out;
+}
+
+img{
+    height: 65vh;
+
+}
+    .right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .right img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      animation: imageFadeIn 1.5s ease-in-out forwards;
+    }
+
+    @keyframes imageFadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+
+    .display2 {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        /* outline: 1px solid blue; */
+    }
+    
+    .content-section {
+        display: none;
+        padding: 0;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+    /* display home by default */
+    #home{  
+        display: block;
+    }
+    
+    /* Display other sections while removing the home sections */
+    .display2 > div:target ~ #home {
+        display: none;
+    }
+    
+    
+    #features:target,
+    #about:target,
+    #blog:target,
+    #contact:target,
+    #faqs:target {
+        display: block;
+    }
+    
+    #features,
+    #about,
+    #blog,
+    #contact,
+    #faqs{
+        height: 80vh;
+    }
+    
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    .nav-logo{
+        color: #74C0FC;
+    }
+    .nav-link{
+        color: whitesmoke;
+    }
+    .nav-link:hover{
+        color: #74C0FC;
+        transition: color .2s ease-in-out;
+
+    }
+
+    .content-section h1, .content-section h2{
+        color: whitesmoke;
+    }
+    .content-section p{
+        color: lightgray;
+    }
+    .content-section h3{
+        color: lightgray;
+    }
+    /* Features grid */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .feature-card {
+        background: #3A3A3A;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .feature-card:hover {
+        background: #2C2C2C;
+    }
+    .feature-card img{
+        height: 50px;
+        width: 50px;
+    }
+    
+    /* Home section */
+    .highlight {
+        color: #74C0FC;
+    }
+    
+    /* About section */
+    .about-container {
+        display: flex;
+        gap: 2rem;
+    }
+    
+    .about-column {
+        flex: 1;
+    }
+    .home-p, .about-column p{
+        text-align: justify;    /* Stretches text to fill width */
+        hyphens: auto;         /* Hyphenates long words if needed */
+        line-break: strict;     /* Prevents awkward breaks */
+      }
+    .about-column h2{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .about-column h2 img{
+        width: 40px;
+        height: 40px;
+    }
+    .team-container{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-between;
+
+    }
+    .team{
+        height: 150px;
+        width: 150px;
+        border: 1px solid gray;
+        border-radius: .5em;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: center;
+        padding: .2em;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+        cursor: context-menu;
+    }
+    .team img{
+        height: 50px;
+        width: 50px;
+    }
+    .team:hover {
+        background: #2C2C2C;
+    }
+    .partnerships{
+        display: flex;
+        align-items: center;
+        gap: 1em;
+    }
+    
+    /* Blog section */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .blog-card {
+        background: #3A3A3A;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .blog-card:hover{
+        box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+        transition: .2s ease-in-out;
+    }
+    
+    .blog-image {
+        height: 200px;
+        background: #2C2C2C;
+    }
+    
+    .blog-content {
+        padding: .5rem;
+    }
+    
+    .blog-link {
+        color: #74C0FC;
+        text-decoration: none;
+    }
+    
+    /* Contact section */
+    .contact-container {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+    
+    .contact-info,
+    .social-media {
+        flex: 1;
+    }
+    
+    .contact-details {
+        margin-top: 1.5rem;
+    }
+    
+    .business-hours {
+        margin-top: 2rem;
+    }
+    
+.social-media-links{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+.social-media-links a:hover{
+color: whitesmoke;
+}
+    
+    /* FAQs section */
+    .faq-container {
+        margin-top: 2rem;
+        max-width: 800px;
+    }
+    
+    .faq-item {
+        margin-bottom: 1rem;
+        border-bottom: 1px solid gray;
+        padding-bottom: 1rem;
+    }
+    
+    .faq-question {
+        cursor: pointer;
+    }
+    
+    .faq-toggle {
+        float: right;
+        font-size: .8em;
+    }
+    
+    .faq-answer {
+        display: none;
+        padding-top: 0.5rem;
+    }
+    
+    /* Footer */
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+
+
+        color: whitesmoke;
+    }
+    
+    .footer-container {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 3em;
+        border-top: 1px solid #555;
+
+    }
+    .footer-container > div{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1em;
+    }
+    
+    .footer-list {
+        display: flex;
+        justify-content: space-between;
+        gap: 1em;
+        list-style: none;
+        padding: 0;
+    }
+    
+    
+    .social-links {
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
+    }
+    .social-links img{
+        width: 25px;
+        height: 25px;
+    }
+    .footer h4{
+        color: gray;
+        font-weight: 900;
+    }
+    .footer .logo{
+        color: #74C0FC;
+    }
+    .footer a{
+        color: lightgray;
+        font-weight: 100;
+    }
+    .footer a:hover{
+        color: #74C0FC;
+    }
+
+
+
+
+/* Customer DashBoard */
+.customer-content{
+    align-items: center;
+    height: 80vh;
+    width: 100%;
+    /* outline: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.nav{
+    height: 90vh;
+    width:15%;
+    outline: 1px solid #74C0FC;
+    align-self: flex-start;
+    border-radius: .8em 0 0 .8em;
+}
+.display{
+    align-self: flex-start;
+    height: 90vh;
+    width: 84%;
+    outline: 1px solid gray;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0 .8em .8em 0;
+}
+
+.nav ul{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 1em;
+}
+.nav ul li{
+    list-style: none;
+    margin-block: .2em;
+    /* outline: 1px solid blue; */
+    padding: .5em;
+    /* width: 100%; */
+}
+
+.nav-split{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 95%;
+}
+/* dynamic content display */
+.display > div {
+    display: none; /* Hide all content sections by default */
+}
+.top li a{
+    color: lightgray;
+    font-weight: 700;
+    padding: .3em .1em;
+}
+.bottom li a{
+    color: #74C0FC;
+    font-weight: 700;
+    padding: .3em .1em;
+}
+.top li a:hover{
+    color: #74C0FC;
+    transition: .2s ease-in-out;
+}
+.bottom li a:hover{
+    color: lightgray;
+    transition: .2s ease-in-out;
+
+}
+
+/* Active state for top navigation links */
+.top li a.active {
+    color: #74C0FC; 
+    background-color: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid #74C0FC; 
+    padding-left: 0.7em; 
+}
+
+/* Active state for bottom navigation links */
+.bottom li a.active {
+    color: lightgray; 
+    background-color: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid lightgray; 
+    padding-left: 0.7em; 
+
+}
+
+/* Smooth transition for active state changes */
+.nav ul li a {
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out, border-left 0.2s ease-in-out, padding-left 0.2s ease-in-out;
+}
+
+/* Show the Dashboard section by default */
+#dashboard {
+    display: block;
+    height: 100%;
+    /* outline: 1px solid red; */
+}
+#applyLoan{
+    height: 100%;
+}
+/* Scrollbar Track */
+::-webkit-scrollbar {
+    width: .5em; 
+}
+#loanHistory, #transactionHistory, #paymentTracking{
+    height: 100%;
+    overflow-y: auto;
+}
+
+
+/* Scrollbar Track (background) */
+::-webkit-scrollbar-track {
+    background: lightgray; 
+    border-radius: .2em; 
+    margin: 5em 0;
+}
+
+/* Scrollbar Thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+    background: #74C0FC; 
+    border-radius: .2em;
+    border: none; 
+}
+
+/* Scrollbar Thumb on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #4DA8F8; /* Slightly darker blue on hover */
+}
+.margin{
+    margin: 0 1em;
+    overflow-y: auto;
+}
+/* Show the targeted content section */
+.display > div:target {
+    display: block;
+}
+
+/* Hide the Dashboard section when another section is targeted */
+.display > div:target ~ #dashboard {
+    display: none;
+}
+
+
+.display h1{
+    color: whitesmoke;
+}
+.display p{
+    color: lightgray;
+}
+.dash-header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.greeting p{
+    color: #74C0FC;
+    font-size: 1.2em;
+}
+.span{
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.display-content{
+    margin-top: 1em;
+    height: 80%;
+    overflow-y: auto;
+}
+.data{
+    display: flex;
+    flex-direction: column;
+    height:75%;
+    /* outline: 1px solid red; */
+    justify-content: space-between;
+}
+.metrics {
+    height: 30%;
+    width: 100%;
+    /* margin-bottom: 1em; */
+    display: flex;
+    justify-content: space-around;
+}
+
+.metrics > div {
+    width: 20%;
+    /* height: 70%; */
+    outline: 1px solid gray;
+    border-radius: 1em;
+    margin-inline: .5em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 1em;
+    container-type: inline-size;
+}
+
+.metrics > div:hover {
+    /* outline: 1px solid whitesmoke; */
+    transition: .2s ease-in-out;
+    background-color: #2C2C2C;
+}
+
+.metrics p {
+    margin: 1em;
+    text-align: start;
+}
+.metrics .span-2{
+    font-size: 4em; /* Default size */
+    color: #74C0FC;
+    font-weight: 900;
+    padding: .2em;
+    line-height: 1;
+    white-space: nowrap;
+    display: inline-block; /* Required for width calculations */
+    max-width: 100%;
+    overflow: hidden;
+    transition: font-size 0.3s ease;    
+}
+.metric-value-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 0; /* Allows proper shrinking */
+}
+
+.metrics .span-2 .percentage {
+    /* font-size: 4em;  */
+    color: lightgray;
+    font-weight: 100;
+    margin-left: 0.1em;
+}
+
+
+.visuals{
+    margin: .6em 0 0 0;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+   
+}
+
+
+
+.metrics, .visuals, .admin-visuals, .profile-details{
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+.additional-settings{
+    animation: fadeIn 0.8s ease-in-out;
+
+}
+.loan-right{
+    height: 80%;
+    /* outline: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+
+}
+
+.loan-filter{
+    height: 100%;
+    /* outline: 1px solid blue; */
+    /* background: transparent; */
+    width: 15%;
+    margin-block: -1.5em;
+    margin-left: .1em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: start;
+
+}
+.loan-filter > form > div{
+    /* outline: 1px solid green; */
+    margin-block: -1.5em;
+}
+.loan-filter > form > div > ul{
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    
+}
+
+.loan-filter ul li{
+    display: flex;
+    flex-direction: column;
+    color: lightgray;
+
+}
+
+.loan-filter ul li p{
+    color: whitesmoke;
+    font-weight: 700;
+
+}
+.loan-filter label{
+    /* color: whitesmoke; */
+    font-weight: unset;
+    cursor: pointer;
+
+
+}
+
+/*  checkboxes */
+input[type="checkbox"] {
+    accent-color: #74C0FC;
+    cursor: pointer;
+
+
+}
+/*  radio */
+input[type="radio"] {
+    accent-color: #74C0FC;
+    cursor: pointer;
+
+}
+
+
+.range{
+    display: flex;
+    flex-direction: column;
+}
+.range input{
+    padding: .2em 0;
+    margin: .2em 0;
+    width: 4.5em;
+    text-align: center;
+    font-size: 1em;
+}
+.range input::placeholder{
+    color: gray;
+    font-size: 1em;
+    text-align: center;
+}
+.range .input{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin: .2em 0;
+
+
+}
+.range span{
+    font-size: 1.5em;
+    font-weight: 900;
+    color: #74C0FC;
+}
+.quick-amounts{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+.quick-amounts button{
+    /* margin:  0 .1em 0 0; */
+    margin: .2em 0;
+    padding: .5em .4em;
+    opacity: .8;
+    outline: 1px solid #2C2C2C;
+    
+
+}
+.quick-amounts .one{
+    border-radius: .5em 0 0 .5em;
+}
+.quick-amounts .two{
+    border-radius:0;
+}
+.quick-amounts .three{
+    border-radius: 0 .5em .5em 0;
+}
+.subres{
+    display: flex;
+    width: 100%;
+    margin: 1em 0 0 0;
+    /* justify-content: space-between; */
+}
+.sub{
+    border-radius: .5em 0 0 .5em;
+    /* outline: 1px solid #74C0FC; */
+    border: none;
+
+}
+.res{
+    background: transparent;
+    color: lightgray;
+    padding: .6em .9em;
+    border-radius: 0 .5em .5em 0;
+    outline: 1px solid #3A3A3A;
+    border: none;
+    /* outline: none; */
+
+    
+}
+li p{
+    margin: 1em 0 .5em 0;
+}
+.loan-lenders{
+    height: 100%;
+    outline: 1px solid gray;
+    width: 85%;
+    border-radius: .2em;
+    padding: .2em;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
+    grid-auto-rows: 30%; 
+    gap: .8em .6em ;
+    overflow-y: auto; 
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+iframe {
+    border: none;
+    outline: none;
+}
+
+.loanhistory {
+    height: 70%;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease-in-out;
+
+
+}
+.lender{
+    /* height: 35%; */
+    width: 100%;
+    outline: .15em solid #3A3A3A;
+    border-radius: .2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: default;
+}
+.lender:hover{
+   
+    outline: 1px solid gray;
+    background-color: #2C2C2C;
+    transition: .2s ease-in-out;
+}
+.lender:hover span{
+    transition: .2s  ease-in-out;
+   /* font-weight: 600; */
+   color: whitesmoke;
+}
+.lender > div{
+    display: flex;
+    flex-direction: column;
+}
+.lender span{
+    color: lightgray;
+}
+.lender a{
+    color: #74C0FC;
+}
+.lender button{
+    width: 96%;
+    margin: .2em;
+    background: transparent;
+    color: #74C0FC;
+    outline: 1px solid #74C0FC;
+    border-radius: 0 0 .2em .2em;
+}
+.lender button:hover{
+    background: #74C0FC;
+    color: #2C2C2C;
+    outline: 1px solid #3A3A3A;
+    transition: .2s ease-in-out;
+}
+.lender:hover .lender-icon{
+    transition: .2s  ease-in-out;
+    opacity: 1;
+    background-color: lightgray;
+
+}
+.lender-icon {
+    width: 25px;
+    height: 25px;
+    background-color: #74C0FC;
+    color: #3A3A3A;
+    font-size: 1em;
+    font-weight: bold;
+    text-align: center;
+    line-height: 25px;
+    border-radius: .2em 0 0 0;
+    /* margin-bottom: 10px; */
+    display: inline-block;
+    opacity: .8;
+
+}
+
+
+.loading {
+    position: fixed;  
+    top: 52%;
+    left: 62%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    color: lightgray;
+    font-weight: 900;
+    
+
+}
+
+.no-lenders, .no-results {
+    color: tomato;
+    font-size: 1.5em;
+    font-weight: 900;
+    width: max-content;
+    
+}
+.loanhistory .loading {
+    position: fixed;  
+    top: 50%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    color: lightgray;
+    font-weight: 900;
+    
+
+}
+
+.loanhistory .no-loans {
+    color: tomato;
+    font-size: 1.5em;
+    font-weight: 900;
+    
+}
+.popup-overlay2 {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+
+}
+.popup-content {
+    background-color: #28282B;
+    padding: 20px;
+    border-radius: 8px;
+    width: 25%;
+    /* max-width: 500px; */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+}
+
+.popup-content h2 {
+    color: whitesmoke;
+    font-weight: 700;
+}
+.popup-body p{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-group{
+    display: flex;
+    justify-content: space-between;
+
+}
+.form-group label{
+    font-weight: 100;
+    color: lightgray;
+}
+.form-actions{
+    display: flex;
+    gap: 1px;
+    margin: 2.5% 0 0 0;
+    width: 100%;
+    
+    
+}
+#loanApplicationForm input{
+padding: .7em 0;
+background: none;
+border: none;
+border-bottom: 1px solid whitesmoke;
+outline: none;
+color: white;
+font-size: 1.1em;
+margin: .2em 0;
+border-radius: 6px;
+}
+
+/* Choose file decoration */
+#collateralImageGroup{
+    margin-top: .5em;
+
+}
+#collateralImageGroup input[type="file"] {
+    background-color: transparent; 
+    font-size: 1em; 
+    cursor: pointer; 
+    width: 100%;
+    padding: 0;
+    margin-top: .5em;
+    width: 100%;
+}
+/* Style the button for WebKit browsers (Chrome, Safari) */
+#collateralImageGroup input[type="file"]::-webkit-file-upload-button {
+    background-color: #74C0FC; 
+    color: #2C2C2C; 
+    font-weight: 900;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px; 
+    padding: .2em;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; 
+}
+
+#collateralImageGroup input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: whitesmoke; 
+}
+
+/* Style the button for Firefox */
+#collateralImageGroup input[type="file"]::-moz-file-upload-button {
+    background-color: #74C0FC; 
+    color: #2C2C2C; 
+    font-weight: 900;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px; 
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s; 
+}
+
+#collateralImageGroup input[type="file"]::-moz-file-upload-button:hover {
+    background-color: whitesmoke; 
+}
+
+
+
+#paymentForm input, #profileEditForm input{
+padding: .7em 0;
+margin: .2em 0;
+}
+#loanOfferForm input{
+    padding: .7em 0;
+    margin: .2em;
+    text-align: right;
+}
+#loanOfferForm select{
+    margin: 0;
+    width: 100%;
+}
+#editForm input{
+    width: 100%;
+    padding: .7em 0;
+    margin: 0 0 .5em 0;
+}
+
+.form-actions .cancel-btn{
+        border-radius: .5em 0 0 .5em;
+        width: 30%;
+}
+.form-actions .submit-btn{
+    border-radius: 0 .5em .5em 0;
+    width: 70%;
+}
+.display-info{
+    color: whitesmoke;
+    /* margin-block: .3em 1em; */
+    font-weight: 800;
+}
+.cancel-btn{
+    background: tomato;
+    padding: 0.7em .8em;
+
+}
+.cancel-btn:hover{
+    background: transparent;
+    color: tomato;
+    outline: 1px solid tomato;
+    transition: .2s ease-in-out;
+}
+.form-group, .form-group2{
+    display: flex;
+    align-items: center;
+    /* outline: 1px solid gray; */
+    /* justify-content: center; */
+
+}
+.form-group2{
+    margin-block: .3em 1em;
+    display: flex;
+    justify-content: space-between;
+}
+.form-group textarea{
+    height: 3em;
+    /* width: 100%; */
+    outline: none;
+    background-color: lightgray;
+    font-size: 1.2em;
+    margin-top: 2%;
+    color: #1D1E20;
+    resize: none;
+}
+
+/* Message Styles */
+
+
+.alert {
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    font-size: 1em;
+}
+
+.alert.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+
+.simple-loan-table {
+    width: 99%;
+    border-collapse: collapse;
+}
+
+.simple-loan-table thead th {
+    position: sticky;
+    top: 0;
+    background: #3A3A3A;
+    z-index: 10;
+    padding: .5em 0;
+    text-align: left;
+    color: whitesmoke;
+}
+.simple-loan-table td{
+    color: lightgray;
+    text-align: left;
+
+}
+/* Popup Styles */
+.popup-overlay3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 1000;
+  }
+  
+  .popup-content3 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #28282B;
+    padding: 1.5em;
+    width: 20%;
+    border-radius: 1em;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    display: block;
+    z-index: 1001;
+    
+  }
+  
+  .close-btn{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 3em;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: #74C0FC;
+    padding: 0 .2em;
+    font-weight: 100;
+  }
+
+  .close-btn:hover {
+    color: tomato;
+    outline: none;
+    transition: .2s ease-in-out;
+  }
+
+.popup-content3 h2{
+    color: whitesmoke;
+    margin: 0;
+}
+
+.popup-content3 .delete-btn{
+    background-color: tomato;
+    width: 100%;
+}
+.popup-content3 .delete-btn:hover{
+    background: transparent;
+    color: tomato;
+    outline: 1px solid tomato;
+    transition: .2s ease-in-out;
+}
+
+.loan-filter-container{
+    margin-bottom: .5em;
+}
+.loan-filter-container select{
+    padding: .7em;
+    border: none;
+    outline: none;
+    background-color: lightgray;
+    color: #28282B;
+    border-radius: .5em 0 0 .5em ;
+}
+.loan-filter-container button{
+    color: #28282B;
+    background-color: tomato;
+    border-radius: 0 .5em .5em 0;
+
+}
+.loan-filter-container button:hover{
+    background: transparent;
+    color: tomato;
+    outline: 1px solid tomato;
+}
+
+
+.profile-container{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: space-between;
+    width: 99%;
+    height: 90%;
+    
+}
+.profile-details{
+    /* display: flex; */
+    /* flex-direction: column; */
+    width: 50%;
+    height: 90%;
+    
+}
+.profile-details h2, .additional-settings h2{
+    color: whitesmoke;
+    margin: 0;
+}
+.profile-details button{
+    margin: 0 0 .5em .5em;
+}
+.profile-row{
+    padding: .5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    outline: 1px solid #3A3A3A;
+    border-radius: .5em;
+    width: 50%;
+    margin:  .5em;
+
+}
+.form-group input{
+    text-align: right;
+}
+.profile-label{
+    color: lightgray;
+}
+.profile-value{
+    color: whitesmoke;
+    font-weight: 700;
+
+}
+.save-btn{
+    border-radius: 0 .5em .5em 0;
+    width: 70%;
+}
+.additional-settings{
+    width: 50%;
+    height: 90%;
+
+}
+.additional-settings .change:hover{
+    color: whitesmoke;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+
+}
+.additional-settings .delete:hover{
+    color: tomato;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+
+.disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+.active-loans-table table{
+    width: 99%;
+    border-collapse: collapse;
+    margin: .5em 0;
+    animation: fadeIn 0.3s ease-in-out;
+    overflow-y: auto;
+}
+
+.active-loans-table thead th {
+    position: sticky;
+    top: 0;
+    background: #3A3A3A;
+    z-index: 10;
+    padding: .5em 0;
+    text-align: left;
+    color: whitesmoke;
+}
+.active-loans-table td{
+    color: lightgray;
+    text-align: left;
+
+}
+
+.active-loans-table .pay-btn:disabled {
+    background-color: lightgray;
+    color: #2C2C2C;
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+
+/* Lender Dashboard */
+#createLoan{
+    height: 100%;
+    width: 100%;
+    /* outline: 1px solid red; */
+   
+}
+.loan-message {         /* re use this class for messages reporting */
+    background-color: lightgray; 
+    color: #1D1E20; 
+    padding: 0.5em;
+    margin:  0;
+    border: 1px solid #f5c6cb;
+    border-radius: .2em;
+    text-align: center;
+    transition: opacity 0.2s ease; 
+}
+
+.loan-split{
+    display: flex;
+    flex-direction: row;
+    height: 90%;
+    width: 98%;
+    /* outline: 1px solid blue; */
+    justify-content: space-between;
+
+}
+
+.loan-slot{
+    /* outline: 1px solid green; */
+    height: 100%;
+    width: 60%;
+    margin: 1em;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+.loan-slot table{
+    border-spacing: .5em;
+    border-collapse: collapse; 
+    width: 100%;
+}
+.loan-slot h3{
+    color: whitesmoke;
+}
+.loan-slot th{
+    position: sticky;
+    top: 0;
+    background: #3A3A3A;
+    z-index: 10;
+    padding: .5em 0;
+    text-align: left;
+    color: whitesmoke;
+
+}
+.loan-slot td{
+    color: lightgray;
+    text-align: start;
+
+}
+
+.loan-slot .mid, .mid th{
+    text-align: center;
+}
+.loan-slot form{
+    display: inline;
+}
+
+
+
+
+.submit-action button{
+    width: 100%;
+}
+
+.action-buttons{
+    display: flex;
+    justify-content: right;
+    margin-bottom: .1em;
+}
+.action-buttons .act{
+    border-radius: .5em 0 0 .5em;
+    margin-right: .1em;
+
+}
+
+.del-form .del-btn{
+    background: tomato;
+    /* padding: 0.68em .8em; */
+    border-radius: 0 .5em .5em 0;
+
+}
+.del-form .del-btn:hover{
+    background: transparent;
+    color: tomato;
+    outline: 1px solid tomato;
+    transition: .2s ease-in-out;
+}
+
+
+/* Popup Overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    z-index: 1000;
+}
+
+/* Popup Container */
+.edit-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #28282B;
+    padding: 1.5em;
+    width: 20%;
+    border-radius: 1em;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 1001;
+}
+.edit-popup h3{
+    color: whitesmoke;
+}
+/* Form Elements */
+.edit-popup span {
+    width: 90%;
+    color: whitesmoke;
+    font-weight: 700;
+    font: 2em;
+    margin: 1.5em 1em;
+
+}
+.ltype{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1em;
+    justify-content: space-between;
+    
+}
+.ltype span{
+    margin-bottom: 3em;
+}
+.edit-form input {
+    width: 90%;
+    padding: 8px;
+    margin: 0;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+.edit-form label {
+    font-weight: 700;
+}
+.edit-form .del{
+    background: tomato;
+    padding: 0.7em .8em;
+
+}
+.edit-form .del:hover{
+    background: transparent;
+    color: tomato;
+    outline: 1px solid tomato;
+    transition: .2s ease-in-out;
+}
+
+.copyright{
+    width: 100%;
+    color: lightslategray;
+    margin-top: 1%;
+    font-weight: 800;
+    margin: 0 0.2em;
+    /* padding: 0 0.2em; */
+
+}
+.copyright a{
+    text-decoration: underline;
+    color: gray;
+
+}
+.copyright a:hover{
+    text-decoration: none;
+    color: white;
+    transition: .2s ease-in-out;
+}
+.edit-act{
+    width: 100%;
+    display: flex;
+    gap: 1px;
+}
+.edit-act .del{
+    border-radius: .5em 0  0 .5em ;
+    width: 30%;
+}
+.edit-act .act{
+    border-radius: 0 .5em .5em 0;
+    width: 70%;
+}
+#loanRequests{
+    width: 98%;
+    overflow-y: auto;
+    height: 100%;
+}
+#paymentReview{
+        overflow-y: auto;
+        height: 100%;
+}
+.filter-actions .apply-btn{
+    color: #28282B;
+    background-color: #74C0FC;
+}
+.filter-actions .apply-btn:hover{
+    color: #74C0FC;
+    background-color: transparent;
+    outline: 1px solid #74C0FC;
+}
+.loan-requests-table table{
+    width: 100%;
+    border: none;
+    border-collapse: collapse;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+.loan-requests-table thead th {
+    position: sticky;
+    top: 0;
+    background: #3A3A3A;
+    z-index: 10;
+    padding: .5em 0;
+    text-align: left;
+    color: whitesmoke;
+}
+.loan-requests-table td{
+    color: lightgray;
+    text-align: left;
+}
+.loan-requests-table .action-buttons{
+    display: flex;
+    justify-content: flex-end;
+    margin: .1em 0;
+}
+.loan-requests-table .action-buttons button{
+    margin-inline: .1em;
+}
+.loan-requests-table .action-buttons .btn-disburse{
+    border-radius: 0;
+    background-color: teal;
+    color: whitesmoke;
+    outline: none;
+    
+}
+.loan-requests-table .action-buttons .btn-disburse:hover{
+    background: transparent;
+    outline: 1px solid teal;
+    border: none;
+    
+}
+.loan-requests-table .action-buttons .btn-reject{
+    background-color: tomato;
+    border-radius: 0 .5em .5em 0;
+    /* outline: 1px solid tomato; */
+}
+.loan-requests-table .action-buttons .btn-reject:hover{
+    background: unset;
+    color: unset;
+    outline: 1px solid tomato;
+}
+/* Style for disabled buttons */
+.loan-requests-table .action-buttons button:disabled {
+    opacity: .3;
+    cursor: not-allowed;
+}
+/* Risk Level Badges */
+.risk-badge {
+    padding: 4px 8px;
+    font-size: 0.85em;
+    font-weight: 700;
+}
+
+.risk-high {
+    color: tomato;
+    outline: 1px solid tomato;
+}
+
+.risk-medium {
+    color: #74C0FC;
+    outline: 1px solid #74C0FC;
+
+}
+
+.risk-low {
+    color: lightgreen;
+    outline: 1px solid lightgreen;
+
+}
+
+.risk-submitted {
+    color: lightgray;
+    outline: 1px solid lightgray
+
+}
+
+/* View Loan Popup Styles */
+.view-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #28282B;
+    padding: 1.5em;
+    width: 20%;
+    border-radius: 1em;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 1001;
+}
+.view-popup h2{
+    color: whitesmoke;
+    margin: 0 0 .5em 0;
+}
+
+.detail-row{
+    padding: .5em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: .5em;
+    width: 99%;
+    /* margin:  .5em; */
+
+}
+.detail-label{
+    color: lightgray;
+}
+.detail-value{
+    color: lightgray;
+    font-weight: 600;
+
+}
+.action-buttons .btn-view{
+    color: #2C2C2C;
+    background: lightgray;
+    /* outline: 1px solid lightgray; */
+    border-radius: .5em 0 0 .5em;
+    /* border: none; */
+
+}
+.action-buttons .btn-view:hover{
+    color: lightgray;
+    background: transparent;
+    outline: 1px solid lightgray;
+    transition: .2s ease-in-out;
+}
+
+
+
+
+
+
+
+/* Enhanced Filter Styles */
+
+
+.filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    /* min-width: 180px; */
+}
+
+.filter-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.filter-group select {
+    padding: .7em;
+    border: none;
+    background-color: lightgray;
+    color: #28282B;
+    border-radius: .5em ;
+    outline: none;
+
+}
+.filter-group #status, .filter-group #payment_status, .filter-group #payment_method,
+.filter-group #trans_payment_type, #active_loan_type, #risk_level{ 
+    border-radius: .5em 0 0 .5em;
+
+
+}
+.filter-group #loan_type, .filter-group #amount_range, .filter-group #interest_rate,
+.filter-group #date_range, .filter-group #duration_range, .filter-group #collateral_range,
+.filter-group #balance_range, .filter-group #trans_payment_method, .filter-group #trans_amount_range, 
+.filter-group #trans_date_range, #active_date_range, #active_duration_range, #active_amount_range,
+#active_collateral_range
+{ 
+    border-radius: 0;
+
+}
+.filter-actions {
+    display: flex;
+    gap: .2em;
+    align-self: flex-end;
+}
+
+.filter-actions .apply-btn {
+    border-radius: .5em 0 0 .5em;
+}
+
+
+
+.reset-btn {
+    background-color: tomato;
+    color: #28282B;
+    border-radius: 0 .5em .5em 0;
+}
+
+.reset-btn:hover {
+    background: transparent;
+    outline: 1px solid tomato;
+    color: tomato;
+}
+
+
+/* Admin Dashboard */
+
+
+#riskAssessment{
+    overflow-y: auto;
+    height: 100%;
+    width: 98%;
+}
+.risk-action-buttons {
+    width: 100%;
+    display: flex;
+    gap: 1px; 
+    justify-content: space-between;
+}
+
+.risk-action-buttons > div {
+    width: 50%; 
+    text-align: center; 
+}
+
+.risk-approve-btn {
+    background-color: teal;
+    color: whitesmoke;
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid teal;
+    border-radius: .5em 0 0 .5em;
+    cursor: pointer;
+}
+
+.risk-approve-btn:hover {
+    background-color: transparent;
+    border: 1px solid teal;
+    color: whitesmoke;
+    outline: none;
+}
+
+.risk-reject-btn {
+    background-color: tomato;
+    color: #2C2C2C;
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid tomato;
+    border-radius: 0 .5em .5em 0;
+    cursor: pointer;
+}
+
+.risk-reject-btn:hover {
+    background-color: transparent;
+    border: 1px solid tomato;
+    color: tomato;
+    outline: none;
+
+}
+
+#viewUsers{
+    width: 98%;
+    overflow-y: auto;
+    height: 100%;
+
+
+}
+.user-filter{
+    margin-bottom: .5em;
+}
+.user-filter select{
+    padding: .7em;
+    border: none;
+    background-color: lightgray;
+    color: #28282B;
+    border-radius: .5em 0 0 .5em ;
+    outline: none;
+
+}
+.filter-group #status2{ 
+    border-radius: 0;
+
+}
+.user-filter button{
+    padding: .7em;
+    border-radius: 0 .5em .5em 0;
+    background-color: tomato;
+    color: #28282B;
+}
+.user-filter button:hover{
+    background: transparent;
+    outline: 1px solid tomato;
+    color: tomato;
+}
+.users-table {
+    width: 98%;
+    border: none;
+    border-collapse: collapse;
+    outline: none;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.users-table thead th {
+    position: sticky;
+    top: 0;
+    background: #3A3A3A;
+    z-index: 10;
+    padding: .5em 0;
+    text-align: left;
+    color: whitesmoke;
+    border: none;
+    
+}
+.users-table td{
+    color: lightgray;
+    text-align: left;
+    padding: .2em 0 ;
+    
+
+
+}
+.users-table .action-buttons{
+    text-align: right;
+}
+
+
+.users-table .action-buttons .restrict-btn{
+    border-radius: .5em 0 0 .5em;
+
+}
+.users-table .action-buttons .unrestrict-btn{
+    background-color: whitesmoke;
+    border-radius: .5em 0 0 .5em;
+
+}
+.users-table .action-buttons .unrestrict-btn:hover{
+    background: transparent;
+    color: whitesmoke;
+    outline: 1px solid whitesmoke
+}
+.users-table .action-buttons .block-btn{
+    background-color: tomato;
+    border-radius: 0  .5em .5em 0;
+
+}
+.users-table .action-buttons .block-btn:hover{
+    background: transparent;
+    color: tomato;
+    outline: 1px solid tomato;
+}
+.users-table .action-buttons .unblock-btn{
+    background-color: teal;
+    border-radius: .5em;
+    color: whitesmoke;
+
+}
+.users-table .action-buttons .unblock-btn:hover{
+    background: transparent;
+    color: whitesmoke;
+    outline: 1px solid teal;
+}
+
+
+#activityLogs{
+    width: 98%;
+    overflow-y: auto;
+    height: 100%;
+
+
+}
+
+.activity-table {
+    width: 98%;
+    border: none;
+    border-collapse: collapse;
+    outline: none;
+    animation: fadeIn 0.3s ease-in-out;
+
+}
+
+.activity-table thead th {
+    position: sticky;
+    top: 0;
+    background: #3A3A3A;
+    z-index: 10;
+    padding: .5em 0;
+    text-align: left;
+    color: whitesmoke;
+    border: none;
+    
+}
+.activity-table td{
+    color: lightgray;
+    text-align: left;
+    padding: .2em 0 ;
+
+}
+
+.admin-visuals{
+    margin: 0;
+    height: 55%;
+    width: 100%;
+    /* outline: 1px solid blue; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.visuals-left{
+    width: 48%;
+}
+
+.admin-visuals P{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: .8em 0 .5em 0;
+}
+.admin-visuals button{
+padding: .5em;
+margin: unset;
+background: transparent;
+color: lightgray;
+border-bottom: 1px solid lightgray;
+}
+.admin-visuals button:hover{
+    background: transparent;
+    color: #74C0FC;
+    border-bottom: 1px solid #74C0FC;
+    outline: none;
+    }
+.recent-activity-table {
+    border: none;
+    border-collapse: collapse;
+    outline: none;
+    width: 100%;
+}
+
+.recent-activity-table thead th {
+    position: sticky;
+    top: 0;
+    background: #3A3A3A;
+    z-index: 10;
+    padding: .5em 0;
+    text-align: left;
+    color: whitesmoke;
+    border: none;
+    
+}
+.recent-activity-table td{
+    color: lightgray;
+    text-align: left;
+    padding: .2em 0 ;
+
+}
+
+.activity-filter select {
+    padding: .7em;
+    border: none;
+    background-color: lightgray;
+    color: #28282B;
+    border-radius: .5em 0 0 .5em ;
+    outline: none;
+    margin-bottom: .5em;
+
+}
+.activity-filter button{
+    background-color: tomato;
+    border-radius: 0  .5em .5em 0;
+
+}
+.activity-filter button:hover{
+    background: transparent;
+    color: tomato;
+    outline: 1px solid tomato;
+}
+.activity-filter label{
+    font-size: 1em;
+
+}
