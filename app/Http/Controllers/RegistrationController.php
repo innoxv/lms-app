@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Lender;
 use App\Models\Customer;
+use App\Models\LoanOffer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
@@ -98,7 +99,7 @@ class RegistrationController extends Controller
 
     public function showLoginForm()
     {
-        return view('auth.login'); // Updated to reflect new path: resources/views/auth/login.blade.php
+        return view('auth.login');
     }
 
     public function login(Request $request)
@@ -110,7 +111,7 @@ class RegistrationController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->route('dashboard');
         }
 
         return back()->withErrors([
@@ -124,5 +125,17 @@ class RegistrationController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/login');
+    }
+
+    public function showDashboard()
+    {
+        $user = Auth::user();
+        if ($user->role === 'lender') {
+            $lender = $user->lender;
+            $loanOffers = LoanOffer::where('lender_id', $lender->lender_id)->with('lender.user')->get();
+            return view('lenderDashboard', compact('loanOffers'));
+        } else {
+            return view('customerDashboard');
+        }
     }
 }

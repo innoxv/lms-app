@@ -5,7 +5,7 @@ use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/loan-offers', [LoanOfferController::class, 'index']);
-Route::post('/loan-offers', [LoanOfferController::class, 'store']);
+Route::post('/loan-offers', [LoanOfferController::class, 'store'])->name('loan-offers.store');
 Route::patch('/loan-offers/{offer}', [LoanOfferController::class, 'update']);
 Route::delete('/loan-offers/{offer}', [LoanOfferController::class, 'destroy']);
 
@@ -20,7 +20,5 @@ Route::post('/login', [RegistrationController::class, 'login'])->name('login.pos
 // Logout route
 Route::post('/logout', [RegistrationController::class, 'logout'])->name('logout')->middleware('auth');
 
-// Dashboard route (protected by auth middleware)
-Route::get('/dashboard', function () {
-    return view('dashboard'); // Ensure resources/views/dashboard.blade.php exists
-})->name('dashboard')->middleware('auth');
+// Dynamic dashboard route
+Route::get('/dashboard', [RegistrationController::class, 'showDashboard'])->name('dashboard')->middleware('auth');
