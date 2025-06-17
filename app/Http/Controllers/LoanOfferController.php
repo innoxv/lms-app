@@ -25,7 +25,7 @@ class LoanOfferController extends Controller
             'lender_id' => 'required|integer|exists:lenders,lender_id',
         ]);
     
-        // dd($validated); // Remove this line after testing
+       
         LoanOffer::create($validated);
     
         return redirect('/loan-offers')->with('success', 'Offer created successfully!');
