@@ -1,4 +1,4 @@
-body, html{
+html{
     margin: 0;
     background: radial-gradient(
         circle at center,
@@ -12,19 +12,23 @@ body, html{
         #2C2C2C 80%,
         #1D1E20 90%
       );
+      height: 100%;
 
 }
 body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin: 0;
+    margin: 0 2em;
 
 }
 
+.signupForm > div {
+    margin: .5em 0;
+}
 .loan_offers{
     display: flex;
     justify-content: space-around;
     height: 100%;
-    padding: 5rem 8rem;
+    /* padding: 2rem 5rem; */
 }
 .loan_offers h1, h2{
     color: lightgray;
@@ -34,7 +38,8 @@ body{
 }
 .loan_offers form input{
     display: flex;
-    margin: 0;
+    margin: .5em 0;
+    padding: .5em;
 }
 
 .loan_offers_table{
@@ -99,12 +104,78 @@ body{
 
 
 
+.metrics {
+    display: flex;
+    justify-content: space-around;
+}
+
+.metrics > div {
+    width: 20%;
+    outline: 1px solid gray;
+    border-radius: 1em;
+    margin-inline: .5em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 .2em .5em .2em;
+    container-type: inline-size;
+}
+
+.metrics > div:hover {
+    /* outline: 1px solid whitesmoke; */
+    transition: .2s ease-in-out;
+    background-color: #2C2C2C;
+}
+
+.metrics p {
+    margin: 1em;
+    text-align: start;
+    color: lightgray;
+    font-size: 1.2em;
+}
+.metrics span{
+    font-size: 4em;
+    color: #74C0FC;
+}
+.metrics .span-2{
+    font-size: 4em; /* Default size */
+    color: #74C0FC;
+    font-weight: 900;
+    padding: .2em;
+    line-height: 1;
+    white-space: nowrap;
+    display: inline-block; /* Required for width calculations */
+    max-width: 100%;
+    overflow: hidden;
+    transition: font-size 0.3s ease;    
+}
+.metric-value-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 0; /* Allows proper shrinking */
+}
+
+.metrics .span-2 .percentage {
+    /* font-size: 4em;  */
+    color: lightgray;
+    font-weight: 100;
+    margin-left: 0.1em;
+}
 
 
 
-
-
-
+.dash-sec{
+    width: 100%;
+    display: flex;
+    gap: 1em;
+    
+}
+.dash-sec > div{
+    width: 50%;
+}
 
 
 
@@ -140,7 +211,7 @@ body{
 }
 
 /* Container styling */
-.container {
+.container2 {
     width: auto; 
     min-width: 320px; /* Minimum mobile width */
     max-width: 900px; /* Maximum width for larger screens */
@@ -171,7 +242,7 @@ body{
     /* margin: 1em 0; */
     height: 100%;
     /* width: fit-content; */
-    padding: 1em;
+    /* padding: 1em; */
 
 }
 .content-2{
@@ -1005,64 +1076,7 @@ color: whitesmoke;
     /* outline: 1px solid red; */
     justify-content: space-between;
 }
-.metrics {
-    height: 30%;
-    width: 100%;
-    /* margin-bottom: 1em; */
-    display: flex;
-    justify-content: space-around;
-}
 
-.metrics > div {
-    width: 20%;
-    /* height: 70%; */
-    outline: 1px solid gray;
-    border-radius: 1em;
-    margin-inline: .5em;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 1em;
-    container-type: inline-size;
-}
-
-.metrics > div:hover {
-    /* outline: 1px solid whitesmoke; */
-    transition: .2s ease-in-out;
-    background-color: #2C2C2C;
-}
-
-.metrics p {
-    margin: 1em;
-    text-align: start;
-}
-.metrics .span-2{
-    font-size: 4em; /* Default size */
-    color: #74C0FC;
-    font-weight: 900;
-    padding: .2em;
-    line-height: 1;
-    white-space: nowrap;
-    display: inline-block; /* Required for width calculations */
-    max-width: 100%;
-    overflow: hidden;
-    transition: font-size 0.3s ease;    
-}
-.metric-value-container {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 0; /* Allows proper shrinking */
-}
-
-.metrics .span-2 .percentage {
-    /* font-size: 4em;  */
-    color: lightgray;
-    font-weight: 100;
-    margin-left: 0.1em;
-}
 
 
 .visuals{

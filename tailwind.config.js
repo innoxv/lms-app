@@ -12,7 +12,7 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Trebuchet MS', 'Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
     },

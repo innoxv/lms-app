@@ -3,25 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <title>LMS - Customer Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-900 text-white min-h-screen">
-    <div class="container mx-auto p-6">
-        <h1 class="text-2xl font-bold mb-4">Customer Dashboard</h1>
-        <p>Welcome, {{ Auth::user()->user_name }} (Role: {{ Auth::user()->role }})</p>
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
-        <!-- Metrics -->
-        <div class="grid grid-cols-1 gap-4 mb-6">
-            <div class="bg-gray-800 p-4 rounded">
-                <h2 class="text-lg font-semibold">Outstanding Balance</h2>
-                <p class="text-2xl">0.00</p> <!-- Replace with dynamic data -->
+</head>
+<body>
+    <div class="header">
+            <div>
+                <h1>Customer's Dashboard</h1>
+                <p>Welcome, {{ Auth::user()->user_name }} | Role: {{ Auth::user()->role }}</p>
+            </div>
+            <div>
+                <!-- Logout -->
+                <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button type="submit" >Logout</button>
+                </form>
             </div>
         </div>
 
+        <!-- Metrics -->
+        <div class="metrics">
+            <!-- <div>
+                <p>Loan Offers</p>
+                <span>0</span> 
+            </div> -->
+            <div>
+                <p>Active Loans</p>
+                <span>0</span> 
+            </div>
+            <div>
+                <p>Disbursed Loans</p>
+                <span>0</span> 
+            </div>
+            <div>
+                <p>Amount Borrowed</p>
+                <span>0</span> 
+            </div>
+            <div>
+                <p>Outstanding Balance</p>
+                <span>0</span> 
+            </div>
+            <div>
+                <p>Next Payment Date</p>
+                <span>N/A</span> 
+            </div>
+        </div>
+<div class="dash-sec">
         <!-- Loan Applications Section -->
-        <div class="mb-6">
+        <div class="">
             <h2 class="text-xl font-semibold mb-2">Loan Applications</h2>
-            <table class="w-full bg-gray-800 rounded">
+            <table class="loan_offers_table">
                 <thead>
                     <tr>
                         <th class="p-2">Amount</th>
@@ -30,7 +61,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Populate with dynamic data -->
+                    
                     <tr><td colspan="3" class="p-2 text-center">No applications available</td></tr>
                 </tbody>
             </table>
@@ -39,7 +70,7 @@
         <!-- Payment Tracking Section -->
         <div>
             <h2 class="text-xl font-semibold mb-2">Payment Tracking</h2>
-            <table class="w-full bg-gray-800 rounded">
+            <table class="loan_offers_table">
                 <thead>
                     <tr>
                         <th class="p-2">Loan ID</th>
@@ -54,12 +85,8 @@
                 </tbody>
             </table>
         </div>
+</div>
 
-        <!-- Logout -->
-        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-            @csrf
-            <button type="submit" class="text-blue-400 hover:underline">Logout</button>
-        </form>
-    </div>
+
 </body>
 </html>

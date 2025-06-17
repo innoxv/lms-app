@@ -1,88 +1,81 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" >
 <head>
     <meta charset="UTF-8">
     <title>LMS - Lender Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <style>
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .modal-content {
-            background: #1f2937;
-            padding: 20px;
-            border-radius: 5px;
-            width: 300px;
-            color: white;
-        }
-        .modal-action button {
-            margin-right: 10px;
-        }
-        .loan_offers_table th, .loan_offers_table td {
-            padding: 8px;
-            text-align: left;
-        }
-        .loan_offers_table th {
-            background: #374151;
-        }
-        .loan_offers_table tr:nth-child(even) {
-            background: #4b5563;
-        }
-    </style>
+
 </head>
-<body class="bg-gray-900 text-white min-h-screen">
-    <div class="container mx-auto p-6">
-        <h1 class="text-2xl font-bold mb-4">Lender Dashboard</h1>
-        <p>Welcome, {{ Auth::user()->user_name }} (Role: {{ Auth::user()->role }})</p>
+<body>
+    <div class="header">
+        <div>
+            <h1>Lender's Dashboard</h1>
+            <p>Welcome, {{ Auth::user()->user_name }} | Role: {{ Auth::user()->role }}</p>
+        </div>
+        <div>
+            <!-- Logout -->
+            <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                @csrf
+                <button type="submit" >Logout</button>
+            </form>
+        </div>
+    </div>
 
         <!-- Metrics -->
-        <div class="grid grid-cols-2 gap-4 mb-6">
-            <div class="bg-gray-800 p-4 rounded">
-                <h2 class="text-lg font-semibold">Total Loans</h2>
-                <p class="text-2xl">0.00</p> <!-- Replace with dynamic data -->
+        <div class="metrics">
+            <div>
+                <p>Loan Offers</p>
+                <span>0</span> 
             </div>
-            <div class="bg-gray-800 p-4 rounded">
-                <h2 class="text-lg font-semibold">Avg. Interest Rate</h2>
-                <p class="text-2xl">0.00%</p> <!-- Replace with dynamic data -->
+            <div>
+                <p>Active Loans</p>
+                <span>0</span> 
+            </div>
+            <div>
+                <p>Disbursed Loans</p>
+                <span>0</span> 
+            </div>
+            <div>
+                <p>Amount Disbursed</p>
+                <span>0</span> 
+            </div>
+            <div>
+                <p>Amount Owed</p>
+                <span>0</span> 
+            </div>
+            <div>
+                <p>Avg. Interest Rate</p>
+                <span>0.00%</span> 
             </div>
         </div>
 
         <!-- Loan Offers Section -->
         <div class="loan_offers">
-            <div class="mb-6">
-                <h2 class="text-xl font-semibold mb-2">Create a Loan Offer</h2>
-                <form method="POST" action="{{ route('loan-offers.store') }}" class="space-y-4">
+            <div>
+                <h2>Create a Loan Offer</h2>
+                <form method="POST" action="{{ route('loan-offers.store') }}">
                     @csrf
                     <div>
-                        <label class="block text-sm font-medium">Loan Type: <input type="text" name="loan_type" required class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white"></label>
+                        <label>Loan Type: <input type="text" name="loan_type" required></label>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium">Interest Rate: <input type="number" step="0.01" name="interest_rate" required class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white"></label>
+                        <label>Interest Rate: <input type="number" step="0.01" name="interest_rate" required></label>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium">Maximum Amount: <input type="number" step="0.01" name="max_amount" required class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white"></label>
+                        <label>Maximum Amount: <input type="number" step="0.01" name="max_amount" required></label>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium">Maximum Duration (months): <input type="number" name="max_duration" required class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white"></label>
+                        <label>Maximum Duration (months): <input type="number" name="max_duration" required></label>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium">Lender ID: <input type="number" name="lender_id" value="{{ Auth::user()->lender->lender_id }}" readonly class="w-full p-2 bg-gray-800 border border-gray-700 rounded text-white"></label>
-                    </div>
-                    <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">SUBMIT</button>
+
+                    <div><button type="submit">SUBMIT</button></div>
                 </form>
             </div>
-            <div class="mb-6" style="width: 100%;">
-                <h2 class="text-xl font-semibold mb-2">Loan Offers Information</h2>
-                <table class="loan_offers_table w-full">
+            <div style="width: 100%;">
+                <h2>Loan Offers Information</h2>
+                <table class="loan_offers_table">
                     <thead>
                         <tr>
                             <th>Loan Type</th>
@@ -103,8 +96,8 @@
                             <td>{{ $offer->lender->name }}</td>
                             <td>
                                 <input type="hidden" name="offer_id" value="{{ $offer->offer_id }}">
-                                <button class="edit-btn text-blue-400 hover:underline">Edit</button>
-                                <button class="delete-btn text-red-400 hover:underline">Delete</button>
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
                             </td>
                         </tr>
                         @endforeach
@@ -113,12 +106,7 @@
             </div>
         </div>
 
-        <!-- Logout -->
-        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-            @csrf
-            <button type="submit" class="text-blue-400 hover:underline">Logout</button>
-        </form>
-    </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
