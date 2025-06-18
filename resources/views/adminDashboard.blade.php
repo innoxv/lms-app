@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" >
 <head>
     <meta charset="UTF-8">
-    <title>LMS - Lender Dashboard</title>
+    <title>LMS - Admin Dashboard</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -35,14 +35,13 @@
                 <div class="top">
                     <li><a href="#dashboard">Dashboard</a></li>
                     <li>
-                        <a href="#createLoan" 
-                        class="">
-                        Loan Offers
+                        <a href="#createLoan">
+                        Application Review
                         </a>
                     </li>
-                    <li><a href="#loanRequests">Loan Requests</a></li>
-                    <li><a href="#activeLoans">Active Loans</a></li>  
-                    <li><a href="#paymentReview">Payment Tracking</a></li>  
+                    <li><a href="#viewUsers">View Users</a></li>
+                    <li><a href="#addUser">Add New User</a></li>  
+                    <li><a href="#activityLogs">Activity Logs</a></li>  
                     <li><a href="#profile">Profile</a></li>
                 </div>
                 <div class="bottom">
@@ -59,7 +58,7 @@
                 <div id="dashboard" class="margin">
                     <div class="dash-header">
                         <div>
-                            <h1>Lender's Dashboard</h1>
+                            <h1>Administrator's Dashboard</h1>
                             <p>Welcome, {{ Auth::user()->user_name }} | Role: {{ Auth::user()->role }}</p>
                         </div>
                     </div>
@@ -67,52 +66,35 @@
                     <!-- Metrics -->
                     <div class="metrics">
                             <div>
-                                <p>Loan Offers</p>
+                                <p>Total Users</p>
                                 <span>0</span> 
                             </div>
                             <div>
-                                <p>Active Loans</p>
+                                <p>Active Users</p>
                                 <span>0</span> 
                             </div>
                             <div>
-                                <p>Disbursed Loans</p>
+                                <p>Blocked Users</p>
                                 <span>0</span> 
                             </div>
                             <div>
-                                <p>Amount Disbursed</p>
+                                <p>Total Customers</p>
                                 <span>0</span> 
                             </div>
                             <div>
-                                <p>Amount Owed</p>
+                                <p>Total Lenders</p>
                                 <span>0</span> 
                             </div>
                             <div>
-                                <p>Avg. Interest Rate</p>
-                                <span>0.00%</span> 
+                                <p>Total Admins</p>
+                                <span>0</span> 
                             </div>
                         </div>
                 
                         <!-- Loan Offers Section -->
                         <div class="loan_offers">
                             <div>
-                                <h2>Create a Loan Offer</h2>
-                                <form method="POST" action="{{ route('loan-offers.store') }}">
-                                    @csrf
-                                    <div>
-                                        <label>Loan Type: <input type="text" name="loan_type" required></label>
-                                    </div>
-                                    <div>
-                                        <label>Interest Rate: <input type="number" step="0.01" name="interest_rate" required></label>
-                                    </div>
-                                    <div>
-                                        <label>Maximum Amount: <input type="number" step="0.01" name="max_amount" required></label>
-                                    </div>
-                                    <div>
-                                        <label>Maximum Duration (months): <input type="number" name="max_duration" required></label>
-                                    </div>
-                
-                                    <div><button type="submit">SUBMIT</button></div>
-                                </form>
+
                             </div>
                             <div style="width: 100%;">
                                 <h2>Loan Offers Information</h2>
@@ -123,6 +105,7 @@
                                             <th>Interest Rate</th>
                                             <th>Max Amount</th>
                                             <th>Max Duration</th>
+                                            <th>Lender Name</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -133,6 +116,7 @@
                                             <td>{{ $offer->interest_rate }}%</td>
                                             <td>{{ $offer->max_amount }}</td>
                                             <td>{{ $offer->max_duration }} months</td>
+                                            <td>{{ $offer->lender->name }}</td>
                                             <td>
                                                 <input type="hidden" name="offer_id" value="{{ $offer->offer_id }}">
                                                 <button class="edit-btn">Edit</button>
@@ -270,6 +254,6 @@
                 }
             }
         </script>
-  
+
 </body>
 </html>

@@ -17,7 +17,7 @@ html{
 }
 body{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    margin: 0 2em;
+    align-self: center;
 
 }
 
@@ -132,7 +132,7 @@ body{
     margin: 1em;
     text-align: start;
     color: lightgray;
-    font-size: 1.2em;
+    font-size: 1em;
 }
 .metrics span{
     font-size: 4em;
@@ -178,8 +178,11 @@ body{
 }
 
 
-
-
+.logout{
+    padding: .5em;
+    margin-bottom: .5em;
+    font-weight: 900;
+}
 
 
 
@@ -450,7 +453,7 @@ a{
 
 /* Default margins (for larger screens) */
 main {
-    margin: 0 3em;
+    margin: 0 1em;
     /* height: 90vh; */
     /* display: flex;
     flex-direction: column; */
@@ -1074,7 +1077,7 @@ color: whitesmoke;
     flex-direction: column;
     height:75%;
     /* outline: 1px solid red; */
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 

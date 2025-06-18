@@ -126,14 +126,21 @@ class RegistrationController extends Controller
         $request->session()->regenerateToken();
         return redirect('/login');
     }
-
     public function showDashboard()
     {
         $user = Auth::user();
         if ($user->role === 'lender') {
             $lender = $user->lender;
-            $loanOffers = LoanOffer::where('lender_id', $lender->lender_id)->with('lender.user')->get();
+            $loanOffers = LoanOffer::where('lender_id', $lender->lender_id)
+                ->with('lender.user')
+                ->orderBy('offer_id', 'desc')
+                ->get();
             return view('lenderDashboard', compact('loanOffers'));
+        } elseif ($user->role === 'admin') {
+            $loanOffers = LoanOffer::with('lender.user')
+                ->orderBy('offer_id', 'desc')
+                ->get();
+            return view('adminDashboard', compact('loanOffers'));
         } else {
             return view('customerDashboard');
         }
