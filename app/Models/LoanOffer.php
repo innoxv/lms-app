@@ -11,11 +11,15 @@ class LoanOffer extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'lender_id', 'loan_type', 'interest_rate', 'max_amount', 'max_duration'
+        'lender_id',
+        'loan_type',
+        'interest_rate',
+        'max_amount',
+        'max_duration',
     ];
 
     public function lender()
     {
-        return $this->belongsTo(Lender::class, 'lender_id');
+        return $this->belongsTo(Lender::class, 'lender_id', 'lender_id');
     }
 }

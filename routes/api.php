@@ -1,5 +1,5 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\UserController;
 
-Route::apiResource('customers', CustomerController::class);
+Route::apiResource('users', UserController::class);
