@@ -78,7 +78,11 @@ return [
             'query' => [
                 'loanOffers' => App\GraphQL\Queries\LoanOffersQuery::class,
             ],
-            'mutation' => [],
+            'mutation' => [
+                'createLoanOffer' => App\GraphQL\Mutations\CreateLoanOfferMutation::class,
+                'updateLoanOffer' => App\GraphQL\Mutations\UpdateLoanOfferMutation::class,
+                'deleteLoanOffer' => App\GraphQL\Mutations\DeleteLoanOfferMutation::class,
+            ],
         ],
     ],
 
@@ -86,7 +90,6 @@ return [
     // You can then access it from the facade like this: GraphQL::type('user')
     //
 
-    // PSSTT
 
     'types' => [
         'LoanOffer' => App\GraphQL\Types\LoanOfferType::class,
